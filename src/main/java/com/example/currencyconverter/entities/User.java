@@ -27,8 +27,16 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User() {
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
+
+    public User() {
+
+    }
+
 
     public Integer getId() {
         return id;
@@ -43,18 +51,18 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
 
     public Set<Role> getRoles() {

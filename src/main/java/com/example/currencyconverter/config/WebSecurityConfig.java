@@ -24,25 +24,18 @@ public class WebSecurityConfig  {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf()
-                .disable()
+        return httpSecurity
                 .authorizeHttpRequests()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/manager/**").hasRole("MANAGER")
-                .requestMatchers("/exchange").hasRole("USER")
-                .requestMatchers("/").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/manager").hasRole("MANAGER")
+                .requestMatchers("/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
                 .and()
-                .logout()
-                .permitAll()
-                .logoutSuccessUrl("/").and().httpBasic(Customizer.withDefaults());
-        return httpSecurity.build();
+                .build();
+
     }
 
     @Autowired

@@ -37,27 +37,12 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepo.findById(userId);
-        return userFromDb.orElse(new User());
-    }
 
     public List<User> allUsers() {
         return userRepo.findAll();
     }
 
-    public boolean saveUser(User user) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if (userFromDb != null) {
-            return false;
-        }
-
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepo.save(user);
-        return true;
-    }
 
     public boolean deleteUser(Long userId) {
         if (userRepo.findById(userId).isPresent()) {
