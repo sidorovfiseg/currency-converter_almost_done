@@ -8,6 +8,12 @@
     <title>Currency converter</title>
 </head>
 <body>
+  <div th:if="${error}">
+    Check that password confirmation equals password.
+  </div>
+
+
+
   <h1>Register</h1>
   <form method="POST" th:action="@{/register}" id="registerForm">
     <label for="username">Username: </label>
@@ -19,7 +25,19 @@
     <label for="confirm">Confirm password: </label>
     <input type="password" name="confirm"/><br/>
 
+    <label for="role">Choose role: </label>
+    <select name="role" id="role">
+      <option value="user">User</option>
+      <option value="manager">Manager</option>
+      <option value="admin">Admin</option>
+    </select>
+    <br/>
+
     <input type="submit" value="Register"/>
+
+    <p>Click
+      <a th:href="@{/login}">here</a> to login.
+    </p>
 
   </form>
 </body>
