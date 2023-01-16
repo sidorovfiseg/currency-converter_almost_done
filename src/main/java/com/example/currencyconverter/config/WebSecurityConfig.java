@@ -1,5 +1,6 @@
 package com.example.currencyconverter.config;
 
+import com.example.currencyconverter.handlers.LoginSuccessHandler;
 import com.example.currencyconverter.servicies.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,9 @@ public class WebSecurityConfig  {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoginSuccessHandler loginSuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,12 +31,19 @@ public class WebSecurityConfig  {
         return httpSecurity
                 .authorizeHttpRequests()
                 .requestMatchers("/user").hasRole("USER")
-                .requestMatchers("/admin").hasRole("ADMIN")
-                .requestMatchers("/manager").hasRole("MANAGER")
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/admin**").hasRole("ADMIN")
+                .requestMatchers("/manager**").hasRole("MANAGER")
+                .requestMatchers("/", "/register").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .permitAll()
+                .successHandler(loginSuccessHandler)
+                .and()
+                .logout()
+                .permitAll()
                 .and()
                 .build();
 

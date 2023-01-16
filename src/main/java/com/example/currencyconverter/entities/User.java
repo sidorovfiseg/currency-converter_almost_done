@@ -1,11 +1,12 @@
 package com.example.currencyconverter.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -16,19 +17,36 @@ Table of users
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String username;
 
     private String password;
 
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<UserRequest> requests = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+//    public List<UserRequest> getRequests() {
+//        return requests;
+//    }
+//
+//    public void setRequests(List<UserRequest> requests) {
+//        this.requests = requests;
+//    }
+
+    //    public UserRequest getUserRequest() {
+//        return userRequest;
+//    }
+//
+//    public void setUserRequest(UserRequest userRequest) {
+//        this.userRequest = userRequest;
+//    }
 
     public User(String username, String password) {
         this.username = username;
@@ -40,11 +58,11 @@ public class User implements UserDetails {
     }
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,18 +71,18 @@ public class User implements UserDetails {
         return username;
     }
 
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Override
     public String getPassword() {
         return password;
     }
 
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
     public Set<Role> getRoles() {
@@ -77,6 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return getRoles();
     }
 

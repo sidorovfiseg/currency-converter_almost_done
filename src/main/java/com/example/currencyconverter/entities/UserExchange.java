@@ -13,7 +13,7 @@ one currency you can get from another currency
  */
 
 @Entity
-@Table(name = "exchange pairs")
+@Table(name = "exchange_pairs")
 public class UserExchange {
 
     @Id

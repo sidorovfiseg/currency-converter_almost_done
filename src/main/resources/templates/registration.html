@@ -5,26 +5,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <style>
-      .error {
-        color: red;
-      }
-    </style>
     <title>Currency converter</title>
 </head>
 <body>
+  <div th:if="${error}">
+    Check that password confirmation equals password.
+  </div>
 
 
 
   <h1>Register</h1>
-  <form method="POST" action="#" th:action="@{/register}" th:object="${registrationForm}" class="error">
-    <div>
-      <label for="username">Username: </label>
-      <input type="text" th:field="*{username}"/><br/>
-      <p th:if="${#fields.hasError('username')}"
-         th:class="${#fields.hasErrors('email')}? error"
-         th:errors="*{username}"/>
-    </div>
+  <form method="POST" th:action="@{/register}" id="registerForm">
+    <label for="username">Username: </label>
+    <input type="text" name="username"/><br/>
 
     <label for="password">Password: </label>
     <input type="password" name="password"/><br/>

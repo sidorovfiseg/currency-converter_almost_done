@@ -2,10 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Govno</title>
+	<title>Currency converter</title>
 </head>
 <body>
-<h1>Welcome to...</h1>
+<h1>Конвертер валют</h1>
+
+<h3>Для начала работы с приложением необходимо авторизоваться</h3>
+
+<form th:action="@{/login}">
+	<input type="submit" th:value="Авторизоваться">
+</form>
+
+<form th:action="@{/register}">
+	<input type="submit" th:value="Зарегистрироваться">
+</form>
 
 </body>
 </html>

@@ -45,8 +45,8 @@ public class XMLParserSAX implements XMLParser{
 
         Currency rub = new Currency(
                 "", "643",
-                "RUB", 1, "Российский рубль"
-        );
+                "RUB", 1, "Российский рубль"    );
+        currenciesSAX.add(rub);
         exchangeRatesSAX.add(new ExchangeRate(rub, 1.0));
 
         return exchangeRatesSAX;
@@ -91,8 +91,12 @@ public class XMLParserSAX implements XMLParser{
                     break;
                 case "CharCode":
                     charCode = information;
+                    break;
                 case "Nominal":
                     nominal = Integer.parseInt(information);
+                    break;
+                case "Name":
+                    name = information;
                     break;
                 case "Value":
                     value = Double.parseDouble(information.replace(",", "."));
@@ -121,6 +125,13 @@ public class XMLParserSAX implements XMLParser{
                 Currency currency = new Currency(parsedId, numCode, charCode, nominal, name);
                 currenciesSAX.add(currency);
                 exchangeRatesSAX.add(new ExchangeRate(currency, value));
+
+                parsedId = null;
+                numCode = null;
+                charCode = null;
+                nominal = null;
+                name = null;
+                value = null;
             }
         }
 

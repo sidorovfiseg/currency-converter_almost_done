@@ -1,29 +1,35 @@
 package com.example.currencyconverter.forms;
 
+import com.example.currencyconverter.entities.Role;
 import com.example.currencyconverter.entities.User;
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotEmpty;
+import com.example.currencyconverter.repositories.RoleRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class RegistrationForm {
 
-    @NotEmpty(message = "username cannot be empty.")
-    private String username;
 
-    @NotEmpty(message = "password cannot be empty.")
+    private String username;
     private String password;
 
-    @NotEmpty(message = "confirm password cannot be empty.")
-    private String confirmPassword;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public RegistrationForm(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public RegistrationForm() {
-
     }
 
     public String getUsername() {
@@ -42,18 +48,14 @@ public class RegistrationForm {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public User toUser(PasswordEncoder passwordEncoder) {
-        return new User(
+
+
+        User user =  new User(
                 username,
                 passwordEncoder.encode(password)
         );
+
+        return user;
     }
 }

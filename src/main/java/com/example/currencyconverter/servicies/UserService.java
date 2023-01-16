@@ -2,8 +2,10 @@ package com.example.currencyconverter.servicies;
 
 import com.example.currencyconverter.entities.Role;
 import com.example.currencyconverter.entities.User;
+import com.example.currencyconverter.entities.UserRequest;
 import com.example.currencyconverter.repositories.RoleRepo;
 import com.example.currencyconverter.repositories.UserRepo;
+import com.example.currencyconverter.repositories.UserRequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,9 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -22,6 +22,9 @@ public class UserService implements UserDetailsService {
     UserRepo userRepo;
     @Autowired
     RoleRepo roleRepo;
+
+    @Autowired
+    UserRequestRepo userRequestRepo;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -42,11 +45,47 @@ public class UserService implements UserDetailsService {
         return userRepo.findAll();
     }
 
+    public ArrayList<String> getAllUserNames() {
+        List<User> users = allUsers();
+        ArrayList<String> names = new ArrayList<>();
+        for(User user: users) {
+            names.add(user.getUsername());
+        }
+
+        return names;
+    }
+
+    public List<User> getAllUsersExceptAdminAndManager() {
+        List<User> users = allUsers();
+        Iterator<User> i = users.iterator();
+
+        while (i.hasNext()) {
+            User user = i.next();
+            for(Role role: user.getRoles()) {
+                if(role.getName().equals("ROLE_ADMIN") || role.getName().equals("ROLE_MANAGER")) {
+                    i.remove();
+                }
+            }
+        }
+
+        return users;
+
+    }
 
 
-    public boolean deleteUser(Long userId) {
-        if (userRepo.findById(userId).isPresent()) {
-            userRepo.deleteById(userId);
+    public User getUserByName(String name) {
+        return userRepo.findByUsername(name);
+    }
+
+    public boolean deleteUser(String userName) {
+
+        User user =userRepo.findByUsername(userName);
+
+        if (user.isEnabled()) {
+            //userRequestRepo.deleteAllByUserId(user.getId());
+            userRepo.deleteById(user.getId());
+
+
             return true;
         }
         return false;

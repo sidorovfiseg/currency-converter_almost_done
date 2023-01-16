@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Admin</h1>
+
+
+<h3>Заявки:</h3>
+
+<form method="post" th:action="@{/admin}" modelAttribute="usersRequest">
+    <table>
+        <tr>
+            <th>Код валюты</th>
+            <th>Имя валюты</th>
+            <th>Номинал</th>
+            <th>Сколько валюты в рублях</th>
+        </tr>
+
+
+        <tr th:each="request : ${usersRequest}">
+            <td><span th:text="${request.char_code}"></span></td>
+            <td><span th:text="${request.name}"></span></td>
+            <td><span th:text="${request.nominal}"></span> </td>
+            <td><span th:text="${request.value}"></span> </td>
+
+            <td><button type="submit" name="submit_request" th:value="${request.id}" >Добавить</button></td>
+            <td><button type="submit" name="delete_request" th:value="${request.id}" >Удалить</button></td>-->
+
+        </tr>
+    </table>
+
+</form>
+
+
+<form method="post" th:action="@{/admin}" modelAttribute="users">
+    <table>
+        <tr>
+            <th>Имя пользователя</th>
+
+        </tr>
+
+
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.username}"></span></td>
+
+            <td><button type="submit" name="delete_user" th:value="${user.username}" >Удалить</button></td>-->
+
+        </tr>
+    </table>
+
+</form>
+
+
+<div style="margin: 50px">
+    <form th:action="@{/logout}" method="post">
+        <button class="form_button" type="submit">Выход</button>
+    </form>
+</div>
+
+
+</body>
+</html>
