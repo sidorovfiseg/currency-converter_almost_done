@@ -1,5 +1,11 @@
 package com.example.currencyconverter.forms;
 
+
+/*
+Форма для заполнения в авторизации
+передается в пост запрос в контроллере логина
+ */
+
 public class LoginForm {
 
     String username;

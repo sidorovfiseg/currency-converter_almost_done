@@ -3,6 +3,12 @@ package com.example.currencyconverter.forms;
 import com.example.currencyconverter.entities.User;
 import com.example.currencyconverter.entities.UserRequest;
 
+
+/*
+Форма для заполнения в запросе на добавления валютной пары
+передается в пост запрос в контроллере userexchange
+ */
+
 public class RequestForm {
 
     private String char_code;

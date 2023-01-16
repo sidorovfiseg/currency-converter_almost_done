@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/*
+В этом обработки мы переопределяем метод
+для перенаправления при авторизации в
+зависимости от роли
+ */
+
 @Component
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 

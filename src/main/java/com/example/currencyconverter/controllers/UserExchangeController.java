@@ -20,6 +20,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
 
+/*
+Контроллер для пользователя
+здесь есть постзапрос на добавление валютной
+пары, можем менять, сохраняется история
+ВАЖНО:
+В добавлении используем только валидные
+значения, я не тестил, но может упасть ненароком
+ */
+
 @Controller
 @RequestMapping("/user")
 public class UserExchangeController {

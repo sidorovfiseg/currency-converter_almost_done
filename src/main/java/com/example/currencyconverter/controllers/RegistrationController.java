@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+Контроллер для регистрации, регестрирует пользователя
+НЕ НАДО РЕГЕСТРИРОВАТЬСЯ С именами ADMIN и MANAGER
+ */
+
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
@@ -36,11 +41,19 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /*
+    гет запрос показывает вьюшку
+     */
     @GetMapping
     public String registerForm() {
         return "registration";
     }
 
+    /*
+    пост запрос создает пользователя и перенаправляет
+    на страничку авторизации, тоже костыльное добавление
+    пользователя, так не надо делать, но уже в падлу переделывать
+     */
     @PostMapping
     public String processRegistration(RegistrationForm form) {
 

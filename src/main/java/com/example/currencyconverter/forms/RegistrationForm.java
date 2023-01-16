@@ -11,6 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+/*
+Форма для заполнения в регистрации
+передается в пост запрос в контроллере регистрации
+ */
+
 public class RegistrationForm {
 
 

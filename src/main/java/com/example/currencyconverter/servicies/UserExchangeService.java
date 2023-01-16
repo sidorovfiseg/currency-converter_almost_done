@@ -21,6 +21,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+Здесь реализована вся логика
+для расчета валюты в валютной паре
+ */
+
 @Service
 public class UserExchangeService {
     private final CurrencyRepo currencyRepo;

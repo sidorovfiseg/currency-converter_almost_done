@@ -7,6 +7,14 @@ Creating table for currencies, the params are parsed from
 the xml file which one we are getting from Central Bank site
  */
 
+/*
+Таблица для валют
+тут просто геттеры и сеттеры и конструкторы,
+а так же связка с другими таблицами
+как и в остальных сущностях поэтому в них
+не буду писать комментарии
+ */
+
 @Entity
 @Table(name = "currencies")
 public class Currency {

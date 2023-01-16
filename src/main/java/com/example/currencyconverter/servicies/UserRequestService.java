@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/*
+Логика для работы с запросами пользователей
+по названию методов можно понять
+что они делают
+ */
+
 @Service
 public class UserRequestService {
 

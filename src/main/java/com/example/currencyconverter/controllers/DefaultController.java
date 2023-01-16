@@ -15,6 +15,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/*
+Контроллер стартовой страницы
+с кнопками авторизации  регистрации
+ */
+
 @Controller
 public class DefaultController {
 

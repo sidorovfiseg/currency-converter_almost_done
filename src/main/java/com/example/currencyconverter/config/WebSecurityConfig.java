@@ -12,6 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/*
+Конфигурация для spring security, тут
+мы выставляем какие пользователя по каким
+путям могут переходть и реализуем метод для
+шифрования паролей в базе
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig  {

@@ -16,6 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+Контроллер для авторизации пользователя
+В начале мы вызываем первый раз метод
+который добавляет в базу админа и менеджера
+по сути это костыль и он не должен тут
+находится, но уже нет времени исправлять
+ */
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -30,6 +38,10 @@ public class LoginController {
     @Autowired
     RoleRepo roleRepo;
 
+
+    /*
+    метод добавляет админа и менеджера в базу
+     */
 
     private void createAdminAndManager() {
         Role roleAdmin = new Role("ROLE_ADMIN");
@@ -56,7 +68,9 @@ public class LoginController {
 
     }
 
-
+    /*
+    get запрос показывает вьюшку
+     */
     @GetMapping()
     public String auth() {
 
@@ -68,6 +82,10 @@ public class LoginController {
         return "login";
     }
 
+    /*
+    пост запрос перенаправляет на
+    странички пользователей
+     */
     @PostMapping()
     public String login() {
         return "login";

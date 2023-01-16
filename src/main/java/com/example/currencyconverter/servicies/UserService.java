@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/*
+Логика для работы с пользователеми
+тут тоже говорящие методы
+ */
 @Service
 public class UserService implements UserDetailsService {
 

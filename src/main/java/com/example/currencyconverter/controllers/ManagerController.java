@@ -15,6 +15,11 @@ import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+по сути урезанный контроллер для админа
+есл что смотри контроллер админа для пояснений
+ */
+
 @Controller
 public class ManagerController {
 

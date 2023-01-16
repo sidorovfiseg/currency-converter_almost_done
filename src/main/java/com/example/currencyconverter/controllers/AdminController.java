@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/*
+Контроллер для тех, кто зашел с ролью админа,
+здесь обрабатываютс post и get запросы
+ */
+
 @Controller
 public class AdminController {
 
@@ -23,6 +28,9 @@ public class AdminController {
         this.userRequestService = userRequestService;
     }
 
+    /*
+    гет запрос показывает заявки и зарегестрированных пользователей кроме админа и менеджера
+     */
     @GetMapping("/admin")
     public String userList(Model model) {
         model.addAttribute("users", userService.getAllUsersExceptAdminAndManager());
@@ -31,6 +39,9 @@ public class AdminController {
     }
 
 
+    /*
+    пост запрос на добавление заявки
+     */
     @RequestMapping(value = "/admin", params = "submit_request", method = RequestMethod.POST)
     public String submit_request(final HttpServletRequest request, Model model) {
 
@@ -43,6 +54,9 @@ public class AdminController {
 
     }
 
+    /*
+    пост запрос на удаление заявки
+     */
     @RequestMapping(value = "/admin", params = "delete_request", method = RequestMethod.POST)
     public String delete_request(final HttpServletRequest request, Model model) {
         final Long rowId = Long.valueOf(request.getParameter("delete_request"));
@@ -52,7 +66,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
+    /*
+    пост запрос на удаление пользователя
+     */
     @RequestMapping(value = "/admin", params = "delete_user", method = RequestMethod.POST)
     public String delete_user(final HttpServletRequest request, Model model) {
         final String username = String.valueOf(request.getParameter("delete_user"));
