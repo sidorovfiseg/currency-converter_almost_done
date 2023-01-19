@@ -7,24 +7,23 @@
     <meta charset="UTF-8">
     <title>Currency converter</title>
 </head>
-<body>
-  <div th:if="${error}">
-    Check that password confirmation equals password.
-  </div>
+<body style="text-align: center; background-color: cadetblue">
 
 
 
-  <h1>Register</h1>
+
+  <h1>Регистрация</h1>
   <form method="POST" th:action="@{/register}" id="registerForm">
     <label for="username">Username: </label>
     <input type="text" name="username"/><br/>
 
-    <label for="password">Password: </label>
-    <input type="password" name="password"/><br/>
-
+    <div style="margin-top: 10px">
+      <label for="password">Password: </label>
+      <input type="password" name="password"/><br/>
+    </div>
     <br/>
 
-    <input type="submit" value="Register"/>
+    <input type="submit" value="Зарегестрироваться"/>
 
     <p>Click
       <a th:href="@{/login}">here</a> to login.
